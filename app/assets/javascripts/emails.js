@@ -20,13 +20,19 @@ function getEmails(){
 
 function returnUnique(array){
   var operationStart = new Date();
-  var unique = {};
+  var emailLog = {};
+  var uniqueArray = [];
 
-  var pushToUnique = function(email){ unique[email] = true; };
+  var pushToUnique = function(email){ 
+    if(!emailLog[email]) {
+      emailLog[email] = true;
+      uniqueArray.push(email);
+    }
+  };
   array.forEach(pushToUnique);
-  
-  uniqueArray = Object.keys(unique);
+
   elapsedTime = (new Date() - operationStart);
+  console.log(uniqueArray);
   
   return {
     array: uniqueArray,
