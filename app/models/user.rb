@@ -21,12 +21,26 @@ class User < ActiveRecord::Base
   
   
   def self.correct_order_of_emails?(emails_array)
-    expected_order = User.order(:id).distinct.pluck(:email)
+    expected_order = self.all_unique_emails
     emails_array.each_with_index do |email, index|
       matches = (email == expected_order[index])
       return false unless matches
     end
     return true
+  end
+  
+  def self.all_unique_emails
+    unique_emails = []
+    emailLog = {}
+    
+    all.pluck(:email).each do |email|
+      unless emailLog[email]
+        unique_emails << email
+        emailLog[email] = true
+      end
+    end
+    
+    unique_emails
   end
   
 end

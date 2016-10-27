@@ -2,14 +2,7 @@ class EmailsController < ApplicationController
   def index
     before = Time.now 
 
-    @emails = []
-    emailLog = {}
-    User.all.pluck(:email).each do |e|
-      unless emailLog[e]
-        @emails << e
-        emailLog[e] = true
-      end
-    end
+    @emails = User.all_unique_emails
 
     response_time_seconds = (Time.now - before)
     @comparisions = Comparisons.new(amount: @emails.count, time_taken: response_time_seconds)
