@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
   def index
-    before = Time.now
+    before = Time.now 
     @emails = User.order(:id).distinct.pluck(:email)
     response_time_seconds = (Time.now - before)
     @comparisions = Comparisons.new(amount: @emails.count, time_taken: response_time_seconds)
