@@ -1,5 +1,29 @@
 var alreadyGotEmails = false;
 
+var apiUrl = {
+  useLocalhost: true,
+  heroku: 'https://chefsteps-email.herokuapp.com/api/',
+  localhost: 'http://localhost:3000/api/'
+};
+
+function api(endpoint){
+  if(apiUrl.useLocalhost){ return apiUrl.localhost+endpoint; } 
+  else { return apiUrl.heroku+endpoint; }
+}
+
+function isOriginalOrder(emails){
+  var url = api('emails/is_original_order');
+  var data = {emails: emails};
+  $.post(url, data).then(function(res){
+    var result = { type: 'p', text: String(res) };
+    appendElement('results')(result);
+  });
+  
+  var text = "Are results in the original order? Server says... ";
+  var isOriginalOrder = { type: 'p', text: text };
+  appendElement('results')(isOriginalOrder);
+}
+
 function getEmails(){
   if(alreadyGotEmails) return false;
   var requestStart = new Date();
@@ -14,8 +38,7 @@ function getEmails(){
     removeElement('results', $loading);
     displayResults(results);
   };
-  var emailEndpoint = 'https://chefsteps-email.herokuapp.com/api/emails';
-  $.get(emailEndpoint).then(processAndDisplayEmails);
+  $.get( api('emails') ).then(processAndDisplayEmails);
 }
 
 function returnUnique(array){
@@ -75,6 +98,7 @@ function displayResults(results) {
   ];
   
   elementsToAppend.forEach( appendElement('results') );
+  isOriginalOrder(results.operation.array);
 }
 
 

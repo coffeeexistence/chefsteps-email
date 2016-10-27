@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   
   resources :emails
   get '/api/emails' => 'emails#api_index'
+  post '/api/emails/is_original_order' => 'emails#is_original_order'
 
   # Example resource route with options:
   #   resources :products do

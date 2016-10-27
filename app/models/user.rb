@@ -18,4 +18,15 @@ class User < ActiveRecord::Base
 
     puts "Emails persisted!"
   end
+  
+  
+  def self.correct_order_of_emails?(emails_array)
+    expected_order = User.order(:id).distinct.pluck(:email)
+    emails_array.each_with_index do |email, index|
+      matches = (email == expected_order[index])
+      return false unless matches
+    end
+    return true
+  end
+  
 end

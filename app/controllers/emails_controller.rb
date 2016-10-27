@@ -11,4 +11,9 @@ class EmailsController < ApplicationController
     render json: User.all.pluck(:email)
   end
   
+  def is_original_order
+    emails = params[:emails]
+    render json: User.correct_order_of_emails?(emails)
+  end
+  
 end
