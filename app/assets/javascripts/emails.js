@@ -1,4 +1,7 @@
+var alreadyGotEmails = false;
+
 function getEmails(){
+  if(alreadyGotEmails) return false;
   var requestStart = new Date();
   var processAndDisplayEmails = function(res){
     var operationResults = returnUnique(res);
@@ -28,7 +31,7 @@ function returnUnique(array){
 
 function appendElement(parentId){
   var $parent = document.getElementById(parentId);
-  return function(element) {
+  return function(element) { // Mmm currying
     var $element = document.createElement(element.type);
     var $content = document.createTextNode(element.text);
     $element.appendChild($content); 

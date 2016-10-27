@@ -4,7 +4,7 @@
       Hello Michael,
     </p>
     <p>
-      It took <%= @response_time_ms %> milliseconds to get the 
+      From the back-end, It took <%= @response_time_ms %> milliseconds to get the 
       <%= number_with_delimiter(@emails.count, :delimiter => ',') %> 
       unique emails of 100,000 total.<br>
       The rate for 50% duplication is: <%= @comparisions.per_second %> unique emails per second.
