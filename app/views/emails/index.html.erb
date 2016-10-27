@@ -1,1 +1,42 @@
-<%= @emails.count %>
+<div class="center-layout">
+  <div class="container">
+    <p>
+      Hello Michael,
+    </p>
+    <p>
+      It took <%= @response_time_ms %> milliseconds to get the 
+      <%= number_with_delimiter(@emails.count, :delimiter => ',') %> 
+      unique emails of 100,000 total.
+    </p>
+
+    <p>
+      The rate for 50% duplication is: <%= @comparisions.per_second %> unique emails per second.<br>
+      Disclaimer: This operation might have a logarithmic runtime complexity, but for fun let's assume that it would be linear.
+    </p>
+
+    <p>
+      That would mean that in 5.4 billion years it'd take for the sun to engulf the earth.<br>
+      We would theoretically be able to fetch <%= @comparisions.until_sun_engulfs_earth %> emails before that would happen.<br>
+      In other words, quite a few emails before the first couple of truly sunny days in Seattle.
+    </p>
+
+    <p>
+      Pretty quick right? Not so fast, let's take on a different perspective.<br>
+      There are an estimated 10e+23 atoms that make up the average center diamond on a ring.<br>
+      Let's say that each unique email fetched is one atom in the afformentioned diamond,<br>
+      If we had the time to wait until every atom in a 1 carat diamond was generated, 
+      it would take <%= @comparisions.engulfs_needed_to_generate_atoms_in_carat.to_i %> times longer than the 5.4 billion years needed for 
+      the sun to engulf the earth. 
+    </p>
+
+    <p>
+      What does all this mean? It means that perspective is key, and I believe that my perspective, experience, and willingness to 
+      achieve high while empowering those around me, would bring something good to the chef's table.
+    </p>
+    
+    <p>
+      Cheers,<br>
+      John Anthony Rivera
+    </p>
+  </div>
+</div>
