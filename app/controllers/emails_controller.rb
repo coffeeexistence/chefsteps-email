@@ -6,4 +6,9 @@ class EmailsController < ApplicationController
     @comparisions = Comparisons.new(amount: @emails.count, time_taken: response_time_seconds)
     @response_time_ms = (response_time_seconds * 1000).to_i
   end
+  
+  def api_index
+    render json: User.all.pluck(:email)
+  end
+  
 end
