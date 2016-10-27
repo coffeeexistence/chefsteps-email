@@ -10,11 +10,11 @@ function getEmails(){
   var processAndDisplayEmails = function(res){
     var operationResults = returnUnique(res);
     var requestTime = "Request took " + String(new Date - requestStart) + "ms.";
-    var results = { requestTime: requestTime, operation: operationResults };
+    var results = { requestTime: requestTime, operation: operationResults, apiLength: res.length };
     removeElement('results', $loading);
     displayResults(results);
   };
-  var emailEndpoint = 'https://chefsteps-email.herokuapp.com/api/emails';
+  var emailEndpoint = 'http://chefsteps-email.herokuapp.com/api/emails';
   $.get(emailEndpoint).then(processAndDisplayEmails);
 }
 
@@ -62,6 +62,8 @@ function displayResults(results) {
     { type: 'P', text: '===' },
     { type: 'P', text: results.requestTime },
     { type: 'P', text: results.operation.time },
+    { type: 'P', text: "API delivered: " + results.apiLength + " emails" },
+    { type: 'P', text: "Unique emails: " + results.operation.array.length },
     { type: 'BUTTON', text: 'Show me the emails', listener: showEmails },
     { type: 'P', text: '===' }
   ];
