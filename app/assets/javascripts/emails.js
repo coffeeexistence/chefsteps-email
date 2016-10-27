@@ -3,10 +3,15 @@ var alreadyGotEmails = false;
 function getEmails(){
   if(alreadyGotEmails) return false;
   var requestStart = new Date();
+  
+  var loading = { type: 'p', text: "Requesting data from api..." };
+  var $loading = appendElement('results')(loading);
+  
   var processAndDisplayEmails = function(res){
     var operationResults = returnUnique(res);
     var requestTime = "Request took " + String(new Date - requestStart) + "ms.";
     var results = { requestTime: requestTime, operation: operationResults };
+    removeElement('results', $loading);
     displayResults(results);
   };
   var emailEndpoint = 'https://chefsteps-email.herokuapp.com/api/emails';
@@ -37,8 +42,14 @@ function appendElement(parentId){
     $element.appendChild($content); 
     $parent.appendChild($element);
     if(element.listener) $element.addEventListener("click", element.listener);
+    return $element;
   }
 }
+
+function removeElement(parentId, $child){
+  var $parent = document.getElementById(parentId);
+  $parent.removeChild($child);
+};
 
 function displayResults(results) {
   var showEmails = function(){
