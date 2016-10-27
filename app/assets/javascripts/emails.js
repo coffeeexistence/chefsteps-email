@@ -14,7 +14,7 @@ function getEmails(){
     removeElement('results', $loading);
     displayResults(results);
   };
-  var emailEndpoint = 'http://chefsteps-email.herokuapp.com/api/emails';
+  var emailEndpoint = 'https://chefsteps-email.herokuapp.com/api/emails';
   $.get(emailEndpoint).then(processAndDisplayEmails);
 }
 
