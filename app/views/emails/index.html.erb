@@ -6,12 +6,14 @@
     <p>
       It took <%= @response_time_ms %> milliseconds to get the 
       <%= number_with_delimiter(@emails.count, :delimiter => ',') %> 
-      unique emails of 100,000 total.
+      unique emails of 100,000 total.<br>
+      The rate for 50% duplication is: <%= @comparisions.per_second %> unique emails per second.
     </p>
 
     <p>
-      The rate for 50% duplication is: <%= @comparisions.per_second %> unique emails per second.<br>
-      Disclaimer: This operation might have a logarithmic runtime complexity, but for fun let's assume that it would be linear.
+      
+      Disclaimer: This operation might have a logarithmic runtime complexity, 
+      but for fun let's assume that it's linear and heroku was nice enough to give us infinite memory.
     </p>
 
     <p>
